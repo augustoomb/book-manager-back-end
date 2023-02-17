@@ -30,7 +30,7 @@ CREATE TABLE `Books` (
     `in_my_list` int DEFAULT NULL,
     `author_id` int DEFAULT NULL,
     `user_id` int DEFAULT NULL,
-    PRIMARY KEY (`book_id`),
+    PRIMARY KEY (`id`),
     KEY `author_id` (`author_id`),
     KEY `user_id` (`user_id`),
     CONSTRAINT `Books_ibfk_1` FOREIGN KEY (`author_id`) REFERENCES `Authors` (`id`),
