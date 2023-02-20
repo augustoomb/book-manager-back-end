@@ -6,9 +6,10 @@ const app = express();
 
 app.use(express.json());
 
-app.get('/health', (_req, res) => res.status(200).send());
+app.get('/health', (_req, res) => res.status(200).send('OK'));
 
 app.use('/authors', routers.authorRouter);
+app.use('/books', routers.bookRouter);
 
 // middleware de erros
 app.use((err: BaseHTTPError, _: Request, res: Response, __: NextFunction) => {

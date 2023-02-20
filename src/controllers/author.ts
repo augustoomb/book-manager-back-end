@@ -5,13 +5,13 @@ import AuthorInterface from '../interfaces/author';
 import { AuthorService } from '../services/author';
 
 export async function create(req: Request, res: Response, next: NextFunction) {
-  const { name } = req.body as AuthorInterface;
+  const { name, site } = req.body as AuthorInterface;
   const authorService = new AuthorService();
   try {
     if (name === undefined) {
       throw new BadRequest('Você precisa enviar o nome do autor');
     }
-    await authorService.create({ name });
+    await authorService.create({ name, site });
     res.status(201).send();
   } catch (err) {
 

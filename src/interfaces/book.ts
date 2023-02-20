@@ -6,6 +6,6 @@ export default interface Book {
     genre?: string,
     pages?: number,
     thumb?: string,
-    read: number,
-    in_my_list: number,
+    hasBeenRead: number,
+    authorId: number
 }
