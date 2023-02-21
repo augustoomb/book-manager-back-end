@@ -13,21 +13,21 @@ USE book_manager_db;
 
 CREATE TABLE `Authors` (
     `id` int NOT NULL AUTO_INCREMENT,
-    `name` varchar(255) DEFAULT NULL,
+    `name` varchar(255) NOT NULL,
     `site` varchar(255) DEFAULT NULL,
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci;
 
 CREATE TABLE `Books` (
     `id` int NOT NULL AUTO_INCREMENT,
-    `title` varchar(255) DEFAULT NULL,
+    `title` varchar(255) NOT NULL,
     `rating` int DEFAULT NULL,
     `year` int DEFAULT NULL,
     `genre` varchar(255) DEFAULT NULL,
     `pages` int DEFAULT NULL,
     `thumb` text,
-    `has_been_read` int DEFAULT NULL,
-    `author_id` int DEFAULT NULL,
+    `has_been_read` int NOT NULL,
+    `author_id` int NOT NULL,
     -- `user_id` int DEFAULT NULL,
     PRIMARY KEY (`id`),
     KEY `author_id` (`author_id`),
