@@ -1,4 +1,5 @@
 import express, { NextFunction, Request, Response } from 'express';
+import 'express-async-errors';
 import BaseHTTPError from './errors/httpError';
 import * as routers from './routes'
 
