@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
 import BookInterface from '../interfaces/book';
 import { BookService } from '../services/book';
+import { StatusCodes } from 'http-status-codes';
 
 export async function create(req: Request, res: Response, _next: NextFunction) {
   const { title, rating, year,
@@ -13,7 +14,7 @@ export async function create(req: Request, res: Response, _next: NextFunction) {
     genre, pages, thumb, hasBeenRead, authorId
   })
   await bookService.create(objBook)
-  res.status(201).send();
+  res.status(StatusCodes.CREATED).send();
 }
 
 export async function find(req: Request, res: Response, _next: NextFunction) {
@@ -21,7 +22,7 @@ export async function find(req: Request, res: Response, _next: NextFunction) {
   const bookService = new BookService();
 
   const obj = await bookService.find(parseInt(id, 10));
-  return res.status(200).json(obj);
+  return res.status(StatusCodes.OK).json(obj);
 }
 
 export async function list(_req: Request, res: Response, _next: NextFunction) {
@@ -45,7 +46,7 @@ export async function update(req: Request, res: Response, _next: NextFunction) {
     })
 
     await bookService.update(Number(id), objBook)
-    res.status(201).send();
+    res.status(StatusCodes.OK).send();
   }
 
   export async function exclude(req: Request, res: Response, _next: NextFunction) {
@@ -53,5 +54,5 @@ export async function update(req: Request, res: Response, _next: NextFunction) {
     const bookService = new BookService();
 
     await bookService.delete(Number(id));
-    res.status(201).send();
+    res.status(StatusCodes.OK).send();
   }
