@@ -1,5 +1,6 @@
 import express, { NextFunction, Request, Response } from 'express';
 import 'express-async-errors';
+import { ZodError } from 'zod';
 import BaseHTTPError from './errors/httpError';
 import * as routers from './routes'
 
@@ -17,6 +18,10 @@ app.use((err: BaseHTTPError, _: Request, res: Response, __: NextFunction) => {
 
     if (err.statusCode) {
       return res.status(err.statusCode).json({ message: err.message });
+    }
+
+    if(ZodError) {
+      return res.status(500).json({ message: err })
     }
   
     // eslint-disable-next-line no-console
