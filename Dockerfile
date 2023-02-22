@@ -6,6 +6,10 @@ COPY package*.json ./
 
 RUN npm install
 
+# OS PASSOS ABAIXO NÃO NECESSÁRIOS PARA USAR LOCALMENTE,
+# MAS SÃO NECESSÁRIOS PARA DEPLOY NO railway 
 COPY . .
 
-ARG EnvironmentVariable
+RUN npm start
+
+# ARG EnvironmentVariable
