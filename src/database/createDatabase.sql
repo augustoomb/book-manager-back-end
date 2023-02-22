@@ -42,7 +42,7 @@ CREATE TABLE `Books` (
 --     (
 --         1,
 --         'Augusto Barbosa',
---         'augustobarbosa1988@gmail.com',
+--         'augusto@gmail.com',
 --         '$2a$12$xNdeOmNZIvG8JcjYDbN8Bu1PGSXfHt9fRkOY/ZQ0kWk/2f3IzCbpK',
 --         0
 --     );
