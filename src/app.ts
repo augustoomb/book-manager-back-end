@@ -13,7 +13,7 @@ app.get('/health', (_req, res) => res.status(200).send('OK'));
 app.use('/authors', routers.authorRouter);
 app.use('/books', routers.bookRouter);
 
-// middleware de erros
+// middleware de erross
 app.use((err: BaseHTTPError, _: Request, res: Response, __: NextFunction) => {
 
     if (err.statusCode) {

@@ -12,4 +12,4 @@ COPY . .
 
 RUN npm start
 
-# ARG EnvironmentVariable
+ARG EnvironmentVariable
