@@ -20,6 +20,12 @@ export default abstract class Service<T> {
   }
 
   async find(id: number): Promise<T | null> {
+    const model = this.model as Model<T>;
+    const foundObj = await model.find(id)
+    if (!foundObj) {
+      throw new NotFound('O item solicitado não existe');
+    }
+    
     return await this.model.find(id) as T;
   }
 
