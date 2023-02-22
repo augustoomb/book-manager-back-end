@@ -2,13 +2,17 @@ import express, { NextFunction, Request, Response } from 'express';
 import 'express-async-errors';
 import { ZodError } from 'zod';
 import BaseHTTPError from './errors/httpError';
-import * as routers from './routes'
+import * as routers from './routes';
+import path from 'path';
 
 const app = express();
 
 app.use(express.json());
 
 app.get('/health', (_req, res) => res.status(200).send('OK'));
+
+// view da API
+app.get('/', (_req, res) => res.sendFile(path.join(__dirname, 'views', 'index.html')))
 
 app.use('/authors', routers.authorRouter);
 app.use('/books', routers.bookRouter);
