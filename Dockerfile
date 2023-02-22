@@ -10,6 +10,6 @@ RUN npm install
 # MAS SÃO NECESSÁRIOS PARA DEPLOY NO railway 
 COPY . .
 
-RUN npm start
-
 ARG EnvironmentVariable
+
+RUN npm start
