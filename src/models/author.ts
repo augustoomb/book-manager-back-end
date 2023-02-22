@@ -11,7 +11,7 @@ export default class AuthorModel implements SimpleModel<Author> {
 
     async create(obj: Author): Promise<void> {
         await this.connection.execute(`INSERT INTO ${DATABASE}.${this.tableName} (name, site)
-        VALUES (?, ?);`, [obj.name, obj.site])
+        VALUES (?, ?);`, [obj.name, obj.site || null])
     }
 
     async list(): Promise<Partial<Author>[]> {
