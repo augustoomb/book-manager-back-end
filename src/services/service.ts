@@ -1,4 +1,5 @@
 // import { ComplexModel, Model, SimpleModel } from '../models/model';
+import NotFound from '../errors/notFound';
 import { Model, SimpleModel } from '../models/model';
 
 
@@ -27,6 +28,10 @@ export default abstract class Service<T> {
     if (model.update === undefined) {
       throw new Error('Não é possível atualizar este item');
     }
+    const foundObj = await model.find(id)
+    if (!foundObj) {
+      throw new NotFound('O item solicitado não existe');
+    }
     await model.update(id, obj);
   }
 
@@ -34,6 +39,10 @@ export default abstract class Service<T> {
     const model = this.model as Model<T>;
     if (model.delete === undefined) {
       throw new Error('Não é possível deletar este item');
+    }
+    const foundObj = await model.find(id)
+    if (!foundObj) {
+      throw new NotFound('O item solicitado não existe');
     }
     await model.delete(id);
   }
