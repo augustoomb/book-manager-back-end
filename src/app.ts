@@ -3,7 +3,9 @@ import 'express-async-errors';
 import { ZodError } from 'zod';
 import BaseHTTPError from './errors/httpError';
 import * as routers from './routes';
-import path from 'path';
+// import path from 'path';
+import swaggerUi from 'swagger-ui-express'
+import swaggerDocs from './swagger.json';
 
 const app = express();
 
@@ -11,8 +13,11 @@ app.use(express.json());
 
 app.get('/health', (_req, res) => res.status(200).send('OK'));
 
-// view da API
-app.get('/', (_req, res) => res.sendFile(path.join(__dirname, 'views', 'index.html')))
+// view da API - substituí pelo swagger
+// app.get('/', (_req, res) => res.sendFile(path.join(__dirname, 'views', 'index.html')))
+
+// swagger
+app.use('/documentation', swaggerUi.serve, swaggerUi.setup(swaggerDocs))
 
 app.use('/authors', routers.authorRouter);
 app.use('/books', routers.bookRouter);
@@ -25,7 +30,7 @@ app.use((err: BaseHTTPError, _: Request, res: Response, __: NextFunction) => {
     }
 
     if(ZodError) {
-      return res.status(500).json({ message: err })
+      return res.status(400).json({ message: err })
     }
   
     // eslint-disable-next-line no-console
