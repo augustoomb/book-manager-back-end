@@ -6,10 +6,11 @@ http://localhost:3000/documentation/
 
 <br />
 
-# Entregáveis
+# Projeto
 
 <details>
   <summary><strong>O que foi desenvolvido ?</strong></summary>
+  <br />
 
   Neste projeto foi desenvolvido uma API e um banco de dados para a gestão de livros lidos! 
 
@@ -21,9 +22,9 @@ http://localhost:3000/documentation/
 # Orientações
 
 <details>
-  <summary><strong>🐋 Rodando no Docker vs Localmente</strong></summary>
+  <summary><strong> Rodando no Docker vs Localmente</strong></summary>
   
-  ## 👉 Com Docker
+  ## Com Docker
  
   **:warning: Antes de começar, seu docker-compose precisa estar na versão 1.29 ou superior. [Veja aqui](https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-compose-on-ubuntu-20-04-pt) ou [na documentação](https://docs.docker.com/compose/install/) como instalá-lo. No primeiro artigo, você pode substituir onde está com `1.26.0` por `1.29.2`.**
 
@@ -52,9 +53,6 @@ http://localhost:3000/documentation/
 
   <br/>
 </details>
-
- <br/>
-
 
 <details>
   <summary><strong>🛠 Execução de testes localmente</strong></summary>
