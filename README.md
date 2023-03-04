@@ -44,14 +44,12 @@ http://localhost:3000/documentation/
 
   <br />
   
-  ## 👉 Sem Docker
+  ## Sem Docker
 
   > :information_source: Instale as dependências [**Caso existam**] com `npm install`
   
   - **✨ Dica:** Para rodar o projeto desta forma, obrigatoriamente você deve ter o `node` instalado em seu computador.
-  - **✨ Dica:** O avaliador espera que a versão do `node` utilizada seja a 16.
-
-  <br/>
+  
 </details>
 
 <details>
