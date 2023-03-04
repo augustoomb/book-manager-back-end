@@ -1,6 +1,6 @@
 # Boas-vindas ao repositório Book Manager!
 
-Aqui você vai encontrar os detalhes sobre o desenvolvimento do projeto.
+Documentação feita no Swagger:
 
 http://localhost:3000/documentation/
 
