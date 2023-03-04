@@ -4,7 +4,7 @@ Documentação feita no Swagger:
 
 http://localhost:3000/documentation/
 
-![alt text](https://github.com/augustoomb/book-manager-back-end/api-book-manager-swagger.png)
+![alt text](api-book-manager-swagger.png)
 
 <br />
 
