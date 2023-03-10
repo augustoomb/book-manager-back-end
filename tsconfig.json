@@ -8,11 +8,8 @@
     "moduleResolution": "node",
     "types": [
       // "@types/jest",
-      "@types/chai",
       "@types/express",
-      "@types/mocha",
       "@types/node",
-      "@types/sinon",
       "@types/swagger-ui-express",
       "@typescript-eslint/eslint-plugin",
       "@typescript-eslint/parser",

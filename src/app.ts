@@ -21,6 +21,7 @@ app.use('/documentation', swaggerUi.serve, swaggerUi.setup(swaggerDocs))
 
 app.use('/authors', routers.authorRouter);
 app.use('/books', routers.bookRouter);
+app.use('/users', routers.userRouter);
 
 // middleware de erros
 app.use((err: BaseHTTPError, _: Request, res: Response, __: NextFunction) => {

@@ -5,13 +5,13 @@ import { StatusCodes } from 'http-status-codes';
 
 export async function create(req: Request, res: Response, _next: NextFunction) {
   const { title, rating, year,
-    genre, pages, thumb, hasBeenRead, authorId
+    genre, pages, thumb, hasBeenRead, authorId, userId
    } = req.body;
 
   const bookService = new BookService();
   const objBook = BookInterface.parse({
     title, rating, year,
-    genre, pages, thumb, hasBeenRead, authorId
+    genre, pages, thumb, hasBeenRead, authorId, userId
   })
   await bookService.create(objBook)
   res.status(StatusCodes.CREATED).send();
@@ -34,7 +34,7 @@ export async function list(_req: Request, res: Response, _next: NextFunction) {
 
 export async function update(req: Request, res: Response, _next: NextFunction) {
   const { title, rating, year,
-    genre, pages, thumb, hasBeenRead, authorId
+    genre, pages, thumb, hasBeenRead, authorId, userId
    } = req.body;
 
     const { id } = req.params;
@@ -42,7 +42,7 @@ export async function update(req: Request, res: Response, _next: NextFunction) {
 
     const objBook = BookInterface.parse({
       title, rating, year,
-      genre, pages, thumb, hasBeenRead, authorId
+      genre, pages, thumb, hasBeenRead, authorId, userId
     })
 
     await bookService.update(Number(id), objBook)

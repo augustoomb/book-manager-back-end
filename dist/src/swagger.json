@@ -1,0 +1,65 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Book Manager API",
+        "description": "API Simples para gestão de livros lidos",
+        "contact": {
+            "email": "augustobarbosa1988@gmail.com"
+        },
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:3000",
+            "description": "API test"
+        }
+    ],
+    "paths": {
+        "/authors": {
+            "post": {
+                "summary": "Cadastro de autor",
+                "description": "Essa rota cadastra um novo autor",
+                "tags": ["authors"],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Author"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Produto criado com sucesso"
+                    },
+                    "400": {
+                        "description": "Parâmetros inválidos"
+                    },
+                    "500": {
+                        "description": "Erro interno"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Author": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "example": "Joel Dicker",
+                        "required": "true"
+                    },
+                    "site": {
+                        "type": "string",
+                        "example": "https://www.joeldicker.com/",
+                        "required": "false"
+                    }
+                }
+            }
+        }
+    }
+}
