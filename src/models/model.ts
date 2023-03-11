@@ -3,6 +3,7 @@ export interface SimpleModel<T> {
     list(): Promise<Partial<T>[]>;
     find(id: number): Promise<Partial<T> | null>;
 }
+
 export interface Model<T> extends SimpleModel<T> {
     update(id: number, obj: T): Promise<void>;
     delete(id: number): Promise<void>;

@@ -30,4 +30,12 @@ export default class AuthorModel implements SimpleModel<User> {
         const [users] = result as RowDataPacket[];
         return users[0] as User;
     }
+
+    async findByEmail(email: string): Promise<Partial<User> | null> {
+        const result = await this.connection.execute(`SELECT id, name, email, password, role
+         FROM ${DATABASE}.${this.tableName} AS A WHERE A.email = ?;`, [email]);
+
+        const [users] = result as RowDataPacket[];
+        return users[0] as User;
+    }
 }

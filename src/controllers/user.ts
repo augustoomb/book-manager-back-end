@@ -1,16 +1,26 @@
 import { NextFunction, Request, Response } from 'express';
 import UserInterface from '../interfaces/user';
+// import UserLoginInterface from '../interfaces/userLogin';
 import { UserService } from '../services/user';
 import { StatusCodes } from 'http-status-codes';
+import Bcrypt from '../helpers/bcrypt';
 
 export async function create(req: Request, res: Response, _next: NextFunction) {
-  const { name, email, password, role } = req.body
+  const { name, email, role } = req.body
+  let { password } = req.body
 
   const userService = new UserService();
-  const objUser = UserInterface.parse({ name, email, password, role })
-  await userService.create(objUser);
-  res.status(StatusCodes.CREATED).send();
+  password = Bcrypt.createPassHash(password);
+  const objUser = UserInterface.parse({ name, email, password, role })  
+  const token = await userService.createUser(objUser);
+  res.status(StatusCodes.CREATED).json(token);
 }
+
+// export async function login(req: Request, res: Response, _next: NextFunction) {
+//   const { email } = req.body
+//   const { password } = req.body
+
+// }
 
 export async function find(req: Request, res: Response, _next: NextFunction) {
   const { id } = req.params;
