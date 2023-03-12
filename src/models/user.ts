@@ -5,7 +5,7 @@ import { SimpleModel } from './model';
 
 const DATABASE = 'book_manager_db'
 
-export default class AuthorModel implements SimpleModel<User> {
+export default class UserModel implements SimpleModel<User> {
 
     constructor(private tableName: string = 'Users', private connection = conn){}
 
@@ -31,11 +31,11 @@ export default class AuthorModel implements SimpleModel<User> {
         return users[0] as User;
     }
 
-    async findByEmail(email: string): Promise<Partial<User> | null> {
-        const result = await this.connection.execute(`SELECT id, name, email, password, role
-         FROM ${DATABASE}.${this.tableName} AS A WHERE A.email = ?;`, [email]);
+    // async findByEmail(email: string): Promise<Partial<User> | null> {
+    //     const result = await this.connection.execute(`SELECT id, name, email, password, role
+    //      FROM ${DATABASE}.${this.tableName} AS A WHERE A.email = ?;`, [email]);
 
-        const [users] = result as RowDataPacket[];
-        return users[0] as User;
-    }
+    //     const [users] = result as RowDataPacket[];
+    //     return users[0] as User;
+    // }
 }

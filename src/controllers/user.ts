@@ -1,7 +1,8 @@
 import { NextFunction, Request, Response } from 'express';
 import UserInterface from '../interfaces/user';
-// import UserLoginInterface from '../interfaces/userLogin';
+import UserLoginInterface from '../interfaces/userLogin';
 import { UserService } from '../services/user';
+import { UserLoginService } from '../services/userLogin';
 import { StatusCodes } from 'http-status-codes';
 import Bcrypt from '../helpers/bcrypt';
 
@@ -16,11 +17,14 @@ export async function create(req: Request, res: Response, _next: NextFunction) {
   res.status(StatusCodes.CREATED).json(token);
 }
 
-// export async function login(req: Request, res: Response, _next: NextFunction) {
-//   const { email } = req.body
-//   const { password } = req.body
+export async function login(req: Request, res: Response, _next: NextFunction) {
+  const { email, password } = req.body
 
-// }
+  const userLoginService = new UserLoginService();
+  const objLoginUser = UserLoginInterface.parse({ email, password })
+  const token = await userLoginService.login(objLoginUser);
+  res.status(StatusCodes.OK).json(token);
+}
 
 export async function find(req: Request, res: Response, _next: NextFunction) {
   const { id } = req.params;
