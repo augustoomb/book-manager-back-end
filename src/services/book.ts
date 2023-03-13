@@ -19,6 +19,19 @@ export class BookService extends Service<Book> {
 
     super.create(obj)
   }
+  
+  async update(id: number, obj: Book): Promise<void> {
+    const foundBook = await
+      (this.model as ComplexModelBook<Book>).find(id);
+
+    if (!foundBook) {
+      throw new BadRequest('Livro não existe');      
+    }
+
+    super.update(id, obj)
+  }
+  
+  
 
   // async create(obj: Book): Promise<void> {
   //   if (obj.title.length <= 3) {
