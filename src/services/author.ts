@@ -1,19 +1,28 @@
 import Author from '../interfaces/author';
-import { SimpleModel } from '../models/model';
+import { ComplexModelAuthor } from '../models/model';
 import AuthorModel from '../models/author';
 import Service from './service';
-// import BadRequest from '../errors/badRequest';
+import BadRequest from '../errors/badRequest';
 
 export class AuthorService extends Service<Author> {
-  constructor(model: SimpleModel<Author> = new AuthorModel()) {
+  constructor(model: ComplexModelAuthor<Author> = new AuthorModel()) {
     super(model);
   }
+ 
 
-  // async create(obj: Author): Promise<void> {
-  //   if (obj.name.length <= 3) {
-  //     throw new BadRequest('O nome precisa ter pelo menos 4 caracteres e ser um texto');
-  //   }
-  //   return super.create(obj);
+  async create(obj: Author): Promise<void> {
+    const foundAuthor = await
+      (this.model as ComplexModelAuthor<Author>).findByName(obj.name);
+
+    if (foundAuthor) {
+      throw new BadRequest('Autor já cadastrado');      
+    }
+
+    super.create(obj)
+  }
+
+  // async findByName (name: string): Promise<Partial<Author> | null> {
+  //   return await (this.model as ComplexModelAuthor<Author>).findByName(name)
   // }
 
 }

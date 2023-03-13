@@ -9,6 +9,14 @@ export interface Model<T> extends SimpleModel<T> {
     delete(id: number): Promise<void>;
 }
 
+export interface ComplexModelAuthor<T> extends SimpleModel<T> {
+    findByName(name: string): Promise<Partial<T> | null>;
+}
+
+export interface ComplexModelBook<T> extends Model<T> {
+    findByTitle(title: string): Promise<Partial<T> | null>;
+}
+
 // export interface ComplexModel<T> extends SimpleModel<T> {
 //     findByCast(id: number): Promise<T | null>;
 //     findByCharacter(id: number): Promise<T | null>;

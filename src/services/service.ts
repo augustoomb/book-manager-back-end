@@ -1,13 +1,12 @@
 // import { ComplexModel, Model, SimpleModel } from '../models/model';
 import NotFound from '../errors/notFound';
-import { Model, SimpleModel } from '../models/model';
+import { ComplexModelAuthor, ComplexModelBook, Model, SimpleModel } from '../models/model';
 
 
 export default abstract class Service<T> {
-//   protected model: Model<T> | SimpleModel<T> | ComplexModel<T>;
-  protected model: Model<T> | SimpleModel<T>;
+  protected model: Model<T> | SimpleModel<T> | ComplexModelAuthor<T> | ComplexModelBook<T>;
 //   constructor(model: ComplexModel<T> | Model<T> | SimpleModel<T>) {
-  constructor(model: Model<T> | SimpleModel<T>) {
+  constructor(model: Model<T> | SimpleModel<T> | ComplexModelAuthor<T> | ComplexModelBook<T>) {
     this.model = model;
   }
 
