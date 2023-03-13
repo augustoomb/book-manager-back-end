@@ -1,12 +1,23 @@
 import Book from '../interfaces/book';
-import { Model } from '../models/model';
+import { ComplexModelBook } from '../models/model';
 import BookModel from '../models/book';
 import Service from './service';
-// import BadRequest from '../errors/badRequest';
+import BadRequest from '../errors/badRequest';
 
 export class BookService extends Service<Book> {
-  constructor(model: Model<Book> = new BookModel()) {
+  constructor(model: ComplexModelBook<Book> = new BookModel()) {
     super(model);
+  }
+
+  async create(obj: Book): Promise<void> {
+    const foundBook = await
+      (this.model as ComplexModelBook<Book>).findByTitle(obj.title);
+
+    if (foundBook) {
+      throw new BadRequest('Livro já cadastrado');      
+    }
+
+    super.create(obj)
   }
 
   // async create(obj: Book): Promise<void> {
