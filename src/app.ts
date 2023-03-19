@@ -19,7 +19,7 @@ app.get('/health', (_req, res) => res.status(200).send('OK'));
 // swagger
 app.use('/documentation', swaggerUi.serve, swaggerUi.setup(swaggerDocs))
 
-app.use('/authors', routers.authorRouter);
+// app.use('/authors', routers.authorRouter);
 app.use('/books', routers.bookRouter);
 app.use('/users', routers.userRouter);
 
