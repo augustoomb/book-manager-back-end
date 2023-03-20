@@ -14,9 +14,9 @@ class JwtToken {
         return token;
     }
 
-    public static verifyToken(token: string) {
+    public static verifyToken(token: string): jwt.JwtPayload {
         const data = jwt.verify(token, process.env.JWTSECRET || '@notherP@ss');
-        return data;
+        return data as jwt.JwtPayload;
     }
 }
 
