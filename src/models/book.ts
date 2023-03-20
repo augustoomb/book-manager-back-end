@@ -47,8 +47,7 @@ export default class BookModel implements ComplexModelBook<Book> {
         await this.connection.execute(`UPDATE ${DATABASE}.${this.tableName}
         AS B SET B.title = ?, B.rating = ?, B.year = ?,
         B.genre = ?, B.pages = ?, B.thumb = ?, B.has_been_read = ?, B.author_name = ?,
-        B.info_link, B.user_id = ?
-        WHERE B.id = ?;`, [
+        B.info_link = ?, B.user_id = ? WHERE B.id = ?;`, [
             obj.title, obj.rating || null, obj.year || null, obj.genre || null,
             obj.pages || null, obj.thumb || null, obj.hasBeenRead,
             obj.authorName, obj.infoLink, obj.userId, id
