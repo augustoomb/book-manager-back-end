@@ -33,17 +33,23 @@ const Book = z.object({
     }).lte(1, { 
         message: '"hasBeenRead" deve ser 0 ou 1' 
     }),
-    authorId: z.number({
-        'required_error': '"authorId" é um campo obrigatório',
-        'invalid_type_error': '"authorId" deve ser um número',
-    }).gt(0, { 
-        message: '"authorId" deve ser maior que 0' 
+    // authorId: z.number({
+    //     'required_error': '"authorId" é um campo obrigatório',
+    //     'invalid_type_error': '"authorId" deve ser um número',
+    // }).gt(0, { 
+    //     message: '"authorId" deve ser maior que 0' 
+    // }),
+    authorName: z.string({
+        'required_error': '"authorId" é um campo obrigatório'
     }),
     userId: z.number({
         'required_error': '"userId" é um campo obrigatório',
         'invalid_type_error': '"userId" deve ser um número',
     }).gt(0, { 
         message: '"userId" deve ser maior que 0' 
+    }),
+    infoLink: z.string({
+        'required_error': '"infoLink" é um campo obrigatório'
     }),
 })
 

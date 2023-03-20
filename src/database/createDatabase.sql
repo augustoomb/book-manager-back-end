@@ -11,12 +11,12 @@ CREATE TABLE `Users` (
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci;
 
-CREATE TABLE `Authors` (
-    `id` int NOT NULL AUTO_INCREMENT,
-    `name` varchar(255) NOT NULL,
-    `site` varchar(255) DEFAULT NULL,
-    PRIMARY KEY (`id`)
-) ENGINE = InnoDB AUTO_INCREMENT = 1 DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci;
+-- CREATE TABLE `Authors` (
+--     `id` int NOT NULL AUTO_INCREMENT,
+--     `name` varchar(255) NOT NULL,
+--     `site` varchar(255) DEFAULT NULL,
+--     PRIMARY KEY (`id`)
+-- ) ENGINE = InnoDB AUTO_INCREMENT = 1 DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci;
 
 CREATE TABLE `Books` (
     `id` int NOT NULL AUTO_INCREMENT,
@@ -27,12 +27,14 @@ CREATE TABLE `Books` (
     `pages` int DEFAULT NULL,
     `thumb` text,
     `has_been_read` int NOT NULL,
-    `author_id` int NOT NULL,
+    -- `author_id` int NOT NULL,
+    `author_name` varchar(255) DEFAULT NULL,
     `user_id` int NOT NULL,
+    `info_link` varchar(255) DEFAULT NULL,
     PRIMARY KEY (`id`),
-    KEY `author_id` (`author_id`),
+    -- KEY `author_id` (`author_id`),
     KEY `user_id` (`user_id`),
-    CONSTRAINT `Books_ibfk_1` FOREIGN KEY (`author_id`) REFERENCES `Authors` (`id`),
+    -- CONSTRAINT `Books_ibfk_1` FOREIGN KEY (`author_id`) REFERENCES `Authors` (`id`),
     CONSTRAINT `Books_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `Users` (`id`)
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci;
 
@@ -41,29 +43,30 @@ INSERT INTO
 VALUES
     (
         1,
-        'Augusto Barbosa',
-        'augusto@gmail.com',
+        'john doe',
+        'johndoe@gmail.com',
         '$2a$12$xNdeOmNZIvG8JcjYDbN8Bu1PGSXfHt9fRkOY/ZQ0kWk/2f3IzCbpK',
         0
     );
 
-INSERT INTO
-    `Authors`
-VALUES
-    (1, 'Dan Brown', 'https://danbrown.com/');
+-- INSERT INTO
+--     `Authors`
+-- VALUES
+--     (1, 'Dan Brown', 'https://danbrown.com/');
 
 INSERT INTO
     `Books`
 VALUES
     (
         1,
-        'Código da vinci',
+        'codigo da vinci',
         5,
         2003,
         'romance',
         560,
         'https://m.media-amazon.com/images/I/41aVasi7pML._SY344_BO1,204,203,200_QL70_ML2_.jpg',
         1,
+        'dan brown',
         1,
-        1
+        'https://books.google.com.br/books?id=rpiDAAAACAAJ&dq=c%C3%B3digo+da+vinci&hl=&as_pt=BOOKS&source=gbs_api'
     );
