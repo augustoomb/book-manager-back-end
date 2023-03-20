@@ -10,18 +10,18 @@ const Book = z.object({
     }).min(3,{ 
         message: '"title" deve ter no mínimo 3 caracteres' 
     }),
-    rating: z.number({
-        'invalid_type_error': '"rating" deve ser um número',
-    }).optional(),
-    year: z.number({
-        'invalid_type_error': '"year" deve ser um número',
-    }).optional(),
-    genre: z.string({
-        'invalid_type_error': '"genre" deve ser uma string',
-    }).optional(),
-    pages: z.number({
-        'invalid_type_error': '"pages" deve ser um número',
-    }).optional(),
+    // rating: z.number({
+    //     'invalid_type_error': '"rating" deve ser um número',
+    // }).optional(),
+    // year: z.number({
+    //     'invalid_type_error': '"year" deve ser um número',
+    // }).optional(),
+    // genre: z.string({
+    //     'invalid_type_error': '"genre" deve ser uma string',
+    // }).optional(),
+    // pages: z.number({
+    //     'invalid_type_error': '"pages" deve ser um número',
+    // }).optional(),
     thumb: z.string({
         'invalid_type_error': '"thumb" deve ser uma string',
     }).optional(),

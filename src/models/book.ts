@@ -11,10 +11,9 @@ export default class BookModel implements ComplexModelBook<Book> {
     // eslint-disable-next-line complexity
     async create(obj: Book): Promise<void> {
         await this.connection.execute(`INSERT INTO ${DATABASE}.${this.tableName} 
-        (title, rating, year, genre, pages, thumb, has_been_read, author_name, info_link, user_id) 
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);`, [
-            obj.title, obj.rating || null, obj.year || null, obj.genre || null,
-            obj.pages || null, obj.thumb || null, obj.hasBeenRead,
+        (title, thumb, has_been_read, author_name, info_link, user_id) 
+        VALUES (?, ?, ?, ?, ?, ?);`, [
+            obj.title, obj.thumb || null, obj.hasBeenRead,
             obj.authorName, obj.infoLink, obj.userId])
     }
 
@@ -45,11 +44,9 @@ export default class BookModel implements ComplexModelBook<Book> {
     // eslint-disable-next-line complexity
     async update(id: number, obj: Book): Promise<void> {
         await this.connection.execute(`UPDATE ${DATABASE}.${this.tableName}
-        AS B SET B.title = ?, B.rating = ?, B.year = ?,
-        B.genre = ?, B.pages = ?, B.thumb = ?, B.has_been_read = ?, B.author_name = ?,
+        AS B SET B.title = ?, B.thumb = ?, B.has_been_read = ?, B.author_name = ?,
         B.info_link = ?, B.user_id = ? WHERE B.id = ?;`, [
-            obj.title, obj.rating || null, obj.year || null, obj.genre || null,
-            obj.pages || null, obj.thumb || null, obj.hasBeenRead,
+            obj.title, obj.thumb || null, obj.hasBeenRead,
             obj.authorName, obj.infoLink, obj.userId, id
         ]);
     }
