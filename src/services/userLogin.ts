@@ -4,7 +4,7 @@ import JwtToken from '../helpers/jwtToken';
 import UserLogin from '../interfaces/userLogin';
 import NotFound from '../errors/notFound';
 import Bcrypt from '../helpers/bcrypt';
-import { JwtPayload } from 'jsonwebtoken';
+// import { JwtPayload } from 'jsonwebtoken';
 
 export class UserLoginService {
   model: UserLoginModel = new UserLoginModel();
@@ -26,8 +26,8 @@ export class UserLoginService {
     
   }
 
-  verifyToken(token: string): string | Partial<JwtPayload> {
-    return JwtToken.verifyToken(token);
-  }
+  // verifyToken(token: string): string | Partial<JwtPayload> {
+  //   return JwtToken.verifyToken(token);
+  // }
 
 }
