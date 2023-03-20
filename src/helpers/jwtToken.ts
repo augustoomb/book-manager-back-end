@@ -5,6 +5,7 @@ class JwtToken {
     // public secret = process.env.JWTSECRET || '@notherP@ss';
 
     public static createToken(payload: Partial<User>):string {
+        delete payload.password;
         const token = jwt.sign(
             { payload }, process.env.JWTSECRET || '@notherP@ss', 
             { algorithm: 'HS256', expiresIn: '7d' }

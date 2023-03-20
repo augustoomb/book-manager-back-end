@@ -26,6 +26,14 @@ export async function login(req: Request, res: Response, _next: NextFunction) {
   res.status(StatusCodes.OK).json(token);
 }
 
+export function verifyToken(req: Request, res: Response, _next: NextFunction) {
+  const { token } = req.body
+
+  const userLoginService = new UserLoginService();
+  const data = userLoginService.verifyToken(token);
+  res.status(StatusCodes.OK).json(data);
+}
+
 export async function find(req: Request, res: Response, _next: NextFunction) {
   const { id } = req.params;
   const userService = new UserService();
