@@ -11,6 +11,7 @@ export async function create(req: RequestAuth, res: Response, _next: NextFunctio
    const { userId } = req;
 
   const bookService = new BookService();
+
   const objBook = BookInterface.parse({
     title, thumb, hasBeenRead, authorName, userId, infoLink
   })

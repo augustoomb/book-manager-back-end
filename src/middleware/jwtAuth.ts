@@ -11,10 +11,10 @@ export async function authenticateToken(req: RequestAuth, res: Response, next: N
       return res.status(401).json({'message': 'Token não encontrado'});
     }
 
-    const validation = JwtToken.verifyToken(authorization)
+    const validation = JwtToken.verifyToken(authorization)    
     
     if (validation.payload) {
-      if (await userExists(validation.payload.id)){
+      if (await userExists(validation.payload.id)){        
         req.userId = validation.payload.id
         next();
       }
@@ -30,6 +30,8 @@ async function userExists(idUser: number){
   const userModel = new UserModel();
 
   const foundUser = await userModel.find(idUser);
+
+  // console.log(foundUser)
 
   return foundUser ? true : false
 }

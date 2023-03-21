@@ -31,6 +31,7 @@ export default class UserModel implements SimpleModel<User> {
          FROM ${DATABASE}.${this.tableName} AS A WHERE A.id = ?;`, [id]);
 
         const [users] = result as RowDataPacket[];
+
         return users[0] as User;
     }
 
