@@ -1,4 +1,4 @@
-import { RowDataPacket } from 'mysql2';
+import { ResultSetHeader, RowDataPacket } from 'mysql2';
 import conn from '../database/connection';
 import User from '../interfaces/user';
 import { SimpleModel } from './model';
@@ -9,10 +9,13 @@ export default class UserModel implements SimpleModel<User> {
 
     constructor(private tableName: string = 'Users', private connection = conn){}
 
-    async create(obj: User): Promise<void> {
-        await this.connection.execute(`INSERT INTO ${DATABASE}.${this.tableName}
+    async create(obj: User): Promise<User> {
+        const [result] = await 
+        this.connection.execute<ResultSetHeader>(`INSERT INTO ${DATABASE}.${this.tableName}
         (name, email, password, role)
         VALUES (?, ?, ?, ?);`, [obj.name, obj.email, obj.password, obj.role])
+
+        return {id: result.insertId, ...obj};
     }
 
     async list(): Promise<Partial<User>[]> {

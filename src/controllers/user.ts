@@ -12,7 +12,7 @@ export async function create(req: Request, res: Response, _next: NextFunction) {
 
   const userService = new UserService();
   password = Bcrypt.createPassHash(password);
-  const objUser = UserInterface.parse({ name, email, password, role })  
+  const objUser = UserInterface.parse({ name, email, password, role });
   const token = await userService.createUser(objUser);
   res.status(StatusCodes.CREATED).json(token);
 }

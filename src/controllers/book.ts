@@ -2,17 +2,20 @@ import { NextFunction, Request, Response } from 'express';
 import BookInterface from '../interfaces/book';
 import { BookService } from '../services/book';
 import { StatusCodes } from 'http-status-codes';
+import { RequestAuth } from '../interfaces/requestAuth';
 
-export async function create(req: Request, res: Response, _next: NextFunction) {
-  const { title, thumb, hasBeenRead, authorName, userId, infoLink
+export async function create(req: RequestAuth, res: Response, _next: NextFunction) {
+  const { title, thumb, hasBeenRead, authorName, infoLink
    } = req.body;
+
+   const { userId } = req;
 
   const bookService = new BookService();
   const objBook = BookInterface.parse({
     title, thumb, hasBeenRead, authorName, userId, infoLink
   })
-  await bookService.create(objBook)
-  res.status(StatusCodes.CREATED).send();
+  const createdBook = await bookService.create(objBook)
+  res.status(StatusCodes.CREATED).json(createdBook);
 }
 
 export async function find(req: Request, res: Response, _next: NextFunction) {

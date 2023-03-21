@@ -9,7 +9,7 @@ export class BookService extends Service<Book> {
     super(model);
   }
 
-  async create(obj: Book): Promise<void> {
+  async create(obj: Book): Promise<Partial<Book>> {
     const foundBook = await
       (this.model as ComplexModelBook<Book>).findByTitle(obj.title);
 
@@ -17,7 +17,9 @@ export class BookService extends Service<Book> {
       throw new BadRequest('Livro já cadastrado');      
     }
 
-    super.create(obj)
+    const createdBook = await super.create(obj);
+
+    return createdBook;
   }
   
   async update(id: number, obj: Book): Promise<void> {

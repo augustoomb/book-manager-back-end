@@ -20,9 +20,9 @@ export class UserService extends Service<User> {
       throw new BadRequest('Usuário já existe!!!!');
     }
 
-    super.create(obj);
+    const createdUser = await super.create(obj);
 
-    return JwtToken.createToken(obj);
+    return JwtToken.createToken(createdUser);
   }
 
 }

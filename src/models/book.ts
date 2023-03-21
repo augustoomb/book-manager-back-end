@@ -1,4 +1,4 @@
-import { RowDataPacket } from 'mysql2';
+import { ResultSetHeader, RowDataPacket } from 'mysql2';
 import conn from '../database/connection';
 import Book from '../interfaces/book';
 import { ComplexModelBook } from './model';
@@ -9,12 +9,15 @@ export default class BookModel implements ComplexModelBook<Book> {
     constructor(private tableName: string = 'Books', private connection = conn){}
 
     // eslint-disable-next-line complexity
-    async create(obj: Book): Promise<void> {
-        await this.connection.execute(`INSERT INTO ${DATABASE}.${this.tableName} 
+    async create(obj: Book): Promise<Book> {
+        const [result] = await
+        this.connection.execute<ResultSetHeader>(`INSERT INTO ${DATABASE}.${this.tableName} 
         (title, thumb, has_been_read, author_name, info_link, user_id) 
         VALUES (?, ?, ?, ?, ?, ?);`, [
             obj.title, obj.thumb || null, obj.hasBeenRead,
             obj.authorName, obj.infoLink, obj.userId])
+
+        return {id: result.insertId, ...obj};
     }
 
     async list(): Promise<Partial<Book>[]> {
