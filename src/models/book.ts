@@ -20,9 +20,11 @@ export default class BookModel implements ComplexModelBook<Book> {
         return {id: result.insertId, ...obj};
     }
 
-    async list(): Promise<Partial<Book>[]> {
+    async list(userId: number): Promise<Partial<Book>[]> {
+        // const result = await this.connection.execute(`SELECT *
+        //  FROM ${DATABASE}.${this.tableName};`);
         const result = await this.connection.execute(`SELECT *
-         FROM ${DATABASE}.${this.tableName};`);
+        FROM ${DATABASE}.${this.tableName} AS B WHERE B.user_id = ?;`, [userId]);
 
         const [books] = result;
         return books as Book[];

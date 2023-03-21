@@ -21,15 +21,19 @@ export async function create(req: RequestAuth, res: Response, _next: NextFunctio
 
 export async function find(req: Request, res: Response, _next: NextFunction) {
   const { id } = req.params;
+
   const bookService = new BookService();
 
   const obj = await bookService.find(parseInt(id, 10));
   return res.status(StatusCodes.OK).json(obj);
 }
 
-export async function list(_req: Request, res: Response, _next: NextFunction) {
+export async function list(req: RequestAuth, res: Response, _next: NextFunction) {
   const bookService = new BookService();
-  const bookList = await bookService.list();
+
+  const { userId } = req;
+  console.log('augusto', userId)
+  const bookList = await bookService.list(userId || 0);
 
   return res.json(bookList);
 }

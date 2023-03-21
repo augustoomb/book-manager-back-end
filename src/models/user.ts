@@ -18,7 +18,7 @@ export default class UserModel implements SimpleModel<User> {
         return {id: result.insertId, ...obj};
     }
 
-    async list(): Promise<Partial<User>[]> {
+    async list(_userId: number): Promise<Partial<User>[]> {
         const result = await this.connection.execute(`SELECT id, name, email, password, role
          FROM ${DATABASE}.${this.tableName};`);
 

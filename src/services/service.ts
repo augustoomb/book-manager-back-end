@@ -14,8 +14,8 @@ export default abstract class Service<T> {
     return await this.model.create(obj);
   }
 
-  async list(): Promise<T[]> {
-    return await this.model.list() as T[];
+  async list(userId: number): Promise<T[]> {
+    return await this.model.list(userId) as T[];
   }
 
   async find(id: number): Promise<T | null> {

@@ -5,7 +5,7 @@ import { authenticateToken } from '../middleware/jwtAuth';
 const bookRouter = Router();
 
 
-bookRouter.get('/', list);
+bookRouter.get('/', authenticateToken, list);
 bookRouter.get('/:id', find);
 bookRouter.post('/', authenticateToken, create);
 bookRouter.put('/:id', update);

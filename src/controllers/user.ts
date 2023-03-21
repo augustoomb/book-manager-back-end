@@ -5,6 +5,7 @@ import { UserService } from '../services/user';
 import { UserLoginService } from '../services/userLogin';
 import { StatusCodes } from 'http-status-codes';
 import Bcrypt from '../helpers/bcrypt';
+import { RequestAuth } from '../interfaces/requestAuth';
 
 export async function create(req: Request, res: Response, _next: NextFunction) {
   const { name, email, role } = req.body
@@ -26,14 +27,6 @@ export async function login(req: Request, res: Response, _next: NextFunction) {
   res.status(StatusCodes.OK).json(token);
 }
 
-// export function verifyToken(req: Request, res: Response, _next: NextFunction) {
-//   const { token } = req.body
-
-//   const userLoginService = new UserLoginService();
-//   const data = userLoginService.verifyToken(token);
-//   res.status(StatusCodes.OK).json(data);
-// }
-
 export async function find(req: Request, res: Response, _next: NextFunction) {
   const { id } = req.params;
   const userService = new UserService();
@@ -43,10 +36,11 @@ export async function find(req: Request, res: Response, _next: NextFunction) {
   return res.status(StatusCodes.OK).json(obj);
 }
 
-export async function list(_req: Request, res: Response, _next: NextFunction) {
+export async function list(req: RequestAuth, res: Response, _next: NextFunction) {
   const userService = new UserService();
 
-  const userList = await userService.list();
+  const { userId } = req;
+  const userList = await userService.list(userId || 0);
 
   return res.json(userList);
 }
