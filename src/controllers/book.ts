@@ -32,7 +32,7 @@ export async function list(req: RequestAuth, res: Response, _next: NextFunction)
   const bookService = new BookService();
 
   const { userId } = req;
-  console.log('augusto', userId)
+  // console.log('augusto', userId)
   const bookList = await bookService.list(userId || 0);
 
   return res.json(bookList);
