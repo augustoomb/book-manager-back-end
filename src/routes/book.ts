@@ -8,7 +8,7 @@ const bookRouter = Router();
 bookRouter.get('/', authenticateToken, list);
 bookRouter.get('/:id', find);
 bookRouter.post('/', authenticateToken, create);
-bookRouter.put('/:id', update);
+bookRouter.put('/:id', authenticateToken, update);
 bookRouter.delete('/:id', exclude);
 
 

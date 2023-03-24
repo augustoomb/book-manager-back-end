@@ -8,7 +8,7 @@ export async function create(req: RequestAuth, res: Response, _next: NextFunctio
   const { title, thumb, hasBeenRead, authorName, infoLink
    } = req.body;
 
-   const { userId } = req;
+  const { userId } = req;
 
   const bookService = new BookService();
 
@@ -38,11 +38,12 @@ export async function list(req: RequestAuth, res: Response, _next: NextFunction)
   return res.json(bookList);
 }
 
-export async function update(req: Request, res: Response, _next: NextFunction) {
-  const { title, thumb, hasBeenRead, authorName, userId, infoLink
-   } = req.body;
-
+export async function update(req: RequestAuth, res: Response, _next: NextFunction) {
+    const { title, thumb, hasBeenRead, authorName, infoLink
+    } = req.body;
+    const { userId } = req;
     const { id } = req.params;
+
     const bookService = new BookService();
 
     const objBook = BookInterface.parse({
