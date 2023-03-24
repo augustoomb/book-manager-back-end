@@ -27,11 +27,13 @@ export async function login(req: Request, res: Response, _next: NextFunction) {
   res.status(StatusCodes.OK).json(token);
 }
 
-export async function find(req: Request, res: Response, _next: NextFunction) {
+export async function find(req: RequestAuth, res: Response, _next: NextFunction) {
   const { id } = req.params;
+  const { userId } = req;
+
   const userService = new UserService();
 
-  const obj = await userService.find(parseInt(id, 10));
+  const obj = await userService.find(userId || 0, parseInt(id, 10));
 
   return res.status(StatusCodes.OK).json(obj);
 }

@@ -6,7 +6,7 @@ const bookRouter = Router();
 
 
 bookRouter.get('/', authenticateToken, list);
-bookRouter.get('/:id', find);
+bookRouter.get('/:id', authenticateToken, find);
 bookRouter.post('/', authenticateToken, create);
 bookRouter.put('/:id', authenticateToken, update);
 bookRouter.delete('/:id', exclude);

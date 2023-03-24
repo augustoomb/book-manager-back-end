@@ -18,34 +18,34 @@ export default abstract class Service<T> {
     return await this.model.list(userId) as T[];
   }
 
-  async find(id: number): Promise<T | null> {
+  async find(userId: number, id: number): Promise<T | null> {
     const model = this.model as Model<T>;
-    const foundObj = await model.find(id)
+    const foundObj = await model.find(userId, id)
     if (!foundObj) {
       throw new NotFound('O item solicitado não existe');
     }
     
-    return await this.model.find(id) as T;
+    return await this.model.find(userId, id) as T;
   }
 
-  async update(id: number, obj: T): Promise<void> {
+  async update(userId:number, id: number, obj: T): Promise<void> {
     const model = this.model as Model<T>;
     if (model.update === undefined) {
       throw new Error('Não é possível atualizar este item');
     }
-    const foundObj = await model.find(id)
+    const foundObj = await model.find(userId, id)
     if (!foundObj) {
       throw new NotFound('O item solicitado não existe');
     }
     await model.update(id, obj);
   }
 
-  async delete(id: number): Promise<void> {
+  async delete(userId: number, id: number): Promise<void> {
     const model = this.model as Model<T>;
     if (model.delete === undefined) {
       throw new Error('Não é possível deletar este item');
     }
-    const foundObj = await model.find(id)
+    const foundObj = await model.find(userId, id)
     if (!foundObj) {
       throw new NotFound('O item solicitado não existe');
     }

@@ -2,7 +2,7 @@ export interface SimpleModel<T> {
     // create(obj: T): Promise<void>;
     create(obj: T): Promise<Partial<T>>;
     list(userId: number): Promise<Partial<T>[]>;
-    find(id: number): Promise<Partial<T> | null>;
+    find(userId: number, id: number): Promise<Partial<T> | null>;
 }
 
 export interface Model<T> extends SimpleModel<T> {

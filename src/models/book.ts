@@ -30,9 +30,9 @@ export default class BookModel implements ComplexModelBook<Book> {
         return books as Book[];
     }
 
-    async find(id: number): Promise<Partial<Book> | null> {
+    async find(userId: number, id: number): Promise<Partial<Book> | null> {
         const result = await this.connection.execute(`SELECT *
-         FROM ${DATABASE}.${this.tableName} AS B WHERE B.id = ?;`, [id]);
+         FROM ${DATABASE}.${this.tableName} AS B WHERE B.id = ? AND B.user_id = ?;`, [id, userId]);
 
         const [books] = result as RowDataPacket[];
         return books[0] as Book;
