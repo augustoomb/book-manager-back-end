@@ -14,7 +14,7 @@ export class BookService extends Service<Book> {
       (this.model as ComplexModelBook<Book>).findByTitle(obj.title);
 
     if (foundBook) {
-      throw new BadRequest('Livro já cadastrado');      
+      throw new BadRequest('Livro já adicionado');      
     }
 
     const createdBook = await super.create(obj);
