@@ -7,7 +7,7 @@
     "prebuild": "rm -rf ./dist",
     "build": "tsc",
     "create-views": "mkdir ./dist/src/views/ && cp ./src/views/*.html ./dist/src/views/",
-    "postbuild": "cp ./src/database/*.sql ./dist/src/database/ && npm run create-views",
+    "postbuild": "cp ./src/database/*.sql ./dist/src/database/",
     "lint": "eslint . --ext .ts",
     "dev": "ts-node-dev src/server.ts",
     "prestart": "npm run build",
