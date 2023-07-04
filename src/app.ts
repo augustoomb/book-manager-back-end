@@ -16,7 +16,7 @@ app.use(cors())
 
 app.get('/health', (_req, res) => res.status(200).send('OK'));
 
-// view da API - substituí pelo swagger
+// view da API - substituiçao pelo swagger
 // app.get('/', (_req, res) => res.sendFile(path.join(__dirname, 'views', 'index.html')))
 
 // swagger
