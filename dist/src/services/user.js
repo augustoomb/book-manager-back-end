@@ -12,38 +12,29 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.BookService = void 0;
-const book_1 = __importDefault(require("../models/book"));
+exports.UserService = void 0;
+const user_1 = __importDefault(require("../models/user"));
+const userLogin_1 = __importDefault(require("../models/userLogin"));
 const service_1 = __importDefault(require("./service"));
+const jwtToken_1 = __importDefault(require("../helpers/jwtToken"));
 const badRequest_1 = __importDefault(require("../errors/badRequest"));
-class BookService extends service_1.default {
-    constructor(model = new book_1.default()) {
+class UserService extends service_1.default {
+    constructor(model = new user_1.default()) {
         super(model);
     }
-    create(obj) {
+    createUser(obj) {
         const _super = Object.create(null, {
             create: { get: () => super.create }
         });
         return __awaiter(this, void 0, void 0, function* () {
-            const foundBook = yield this.model.findByTitle(obj.title);
-            if (foundBook) {
-                throw new badRequest_1.default('Livro já adicionado');
+            const userLoginModel = new userLogin_1.default();
+            const foundUser = yield userLoginModel.findByEmail(obj.email);
+            if (foundUser) {
+                throw new badRequest_1.default('Usuário já existe!!!!');
             }
-            const createdBook = yield _super.create.call(this, obj);
-            return createdBook;
-        });
-    }
-    update(userId, id, obj) {
-        const _super = Object.create(null, {
-            update: { get: () => super.update }
-        });
-        return __awaiter(this, void 0, void 0, function* () {
-            const foundBook = yield this.model.find(userId, id);
-            if (!foundBook) {
-                throw new badRequest_1.default('Livro não existe');
-            }
-            yield _super.update.call(this, userId, id, obj);
+            const createdUser = yield _super.create.call(this, obj);
+            return jwtToken_1.default.createToken(createdUser);
         });
     }
 }
-exports.BookService = BookService;
+exports.UserService = UserService;

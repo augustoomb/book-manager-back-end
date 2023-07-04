@@ -1,15 +1,22 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.AuthorService = void 0;
-const author_1 = __importDefault(require("../models/author"));
-const service_1 = __importDefault(require("./service"));
+// import Author from '../interfaces/author';
+// import { ComplexModelAuthor } from '../models/model';
+// import AuthorModel from '../models/author';
+// import Service from './service';
 // import BadRequest from '../errors/badRequest';
-class AuthorService extends service_1.default {
-    constructor(model = new author_1.default()) {
-        super(model);
-    }
-}
-exports.AuthorService = AuthorService;
+// export class AuthorService extends Service<Author> {
+//   constructor(model: ComplexModelAuthor<Author> = new AuthorModel()) {
+//     super(model);
+//   }
+//   async create(obj: Author): Promise<void> {
+//     const foundAuthor = await
+//       (this.model as ComplexModelAuthor<Author>).findByName(obj.name);
+//     if (foundAuthor) {
+//       throw new BadRequest('Autor já cadastrado');      
+//     }
+//     super.create(obj)
+//   }
+//   // async findByName (name: string): Promise<Partial<Author> | null> {
+//   //   return await (this.model as ComplexModelAuthor<Author>).findByName(name)
+//   // }
+// }

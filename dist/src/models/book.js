@@ -22,26 +22,37 @@ class BookModel {
     // eslint-disable-next-line complexity
     create(obj) {
         return __awaiter(this, void 0, void 0, function* () {
-            yield this.connection.execute(`INSERT INTO ${DATABASE}.${this.tableName} 
-        (title, rating, year, genre, pages, thumb, has_been_read, author_id) 
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?);`, [
-                obj.title, obj.rating || null, obj.year || null, obj.genre || null,
-                obj.pages || null, obj.thumb || null, obj.hasBeenRead, obj.authorId
+            const [result] = yield this.connection.execute(`INSERT INTO ${DATABASE}.${this.tableName} 
+        (title, thumb, has_been_read, author_name, info_link, user_id) 
+        VALUES (?, ?, ?, ?, ?, ?);`, [
+                obj.title, obj.thumb || null, obj.hasBeenRead,
+                obj.authorName, obj.infoLink, obj.userId
             ]);
+            return Object.assign({ id: result.insertId }, obj);
         });
     }
-    list() {
+    list(userId) {
         return __awaiter(this, void 0, void 0, function* () {
+            // const result = await this.connection.execute(`SELECT *
+            //  FROM ${DATABASE}.${this.tableName};`);
             const result = yield this.connection.execute(`SELECT *
-         FROM ${DATABASE}.${this.tableName};`);
+        FROM ${DATABASE}.${this.tableName} AS B WHERE B.user_id = ?;`, [userId]);
             const [books] = result;
             return books;
         });
     }
-    find(id) {
+    find(userId, id) {
         return __awaiter(this, void 0, void 0, function* () {
             const result = yield this.connection.execute(`SELECT *
-         FROM ${DATABASE}.${this.tableName} AS B WHERE B.id = ?;`, [id]);
+         FROM ${DATABASE}.${this.tableName} AS B WHERE B.id = ? AND B.user_id = ?;`, [id, userId]);
+            const [books] = result;
+            return books[0];
+        });
+    }
+    findByTitle(title) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const result = yield this.connection.execute(`SELECT *
+         FROM ${DATABASE}.${this.tableName} AS B WHERE B.title = ?;`, [title]);
             const [books] = result;
             return books[0];
         });
@@ -50,11 +61,10 @@ class BookModel {
     update(id, obj) {
         return __awaiter(this, void 0, void 0, function* () {
             yield this.connection.execute(`UPDATE ${DATABASE}.${this.tableName}
-        AS B SET B.title = ?, B.rating = ?, B.year = ?,
-        B.genre = ?, B.pages = ?, B.thumb = ?, B.has_been_read = ?, B.author_id = ?
-        WHERE B.id = ?;`, [
-                obj.title, obj.rating || null, obj.year || null, obj.genre || null,
-                obj.pages || null, obj.thumb || null, obj.hasBeenRead, obj.authorId, id
+        AS B SET B.title = ?, B.thumb = ?, B.has_been_read = ?, B.author_name = ?,
+        B.info_link = ?, B.user_id = ? WHERE B.id = ?;`, [
+                obj.title, obj.thumb || null, obj.hasBeenRead,
+                obj.authorName, obj.infoLink, obj.userId, id
             ]);
         });
     }

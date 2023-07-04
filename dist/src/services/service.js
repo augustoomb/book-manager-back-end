@@ -21,44 +21,44 @@ class Service {
     }
     create(obj) {
         return __awaiter(this, void 0, void 0, function* () {
-            yield this.model.create(obj);
+            return yield this.model.create(obj);
         });
     }
-    list() {
+    list(userId) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield this.model.list();
+            return yield this.model.list(userId);
         });
     }
-    find(id) {
+    find(userId, id) {
         return __awaiter(this, void 0, void 0, function* () {
             const model = this.model;
-            const foundObj = yield model.find(id);
+            const foundObj = yield model.find(userId, id);
             if (!foundObj) {
                 throw new notFound_1.default('O item solicitado não existe');
             }
-            return yield this.model.find(id);
+            return yield this.model.find(userId, id);
         });
     }
-    update(id, obj) {
+    update(userId, id, obj) {
         return __awaiter(this, void 0, void 0, function* () {
             const model = this.model;
             if (model.update === undefined) {
                 throw new Error('Não é possível atualizar este item');
             }
-            const foundObj = yield model.find(id);
+            const foundObj = yield model.find(userId, id);
             if (!foundObj) {
                 throw new notFound_1.default('O item solicitado não existe');
             }
             yield model.update(id, obj);
         });
     }
-    delete(id) {
+    delete(userId, id) {
         return __awaiter(this, void 0, void 0, function* () {
             const model = this.model;
             if (model.delete === undefined) {
                 throw new Error('Não é possível deletar este item');
             }
-            const foundObj = yield model.find(id);
+            const foundObj = yield model.find(userId, id);
             if (!foundObj) {
                 throw new notFound_1.default('O item solicitado não existe');
             }

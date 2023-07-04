@@ -33,15 +33,18 @@ const routers = __importStar(require("./routes"));
 // import path from 'path';
 const swagger_ui_express_1 = __importDefault(require("swagger-ui-express"));
 const swagger_json_1 = __importDefault(require("./swagger.json"));
+const cors_1 = __importDefault(require("cors"));
 const app = (0, express_1.default)();
 app.use(express_1.default.json());
+app.use((0, cors_1.default)());
 app.get('/health', (_req, res) => res.status(200).send('OK'));
 // view da API - substituí pelo swagger
 // app.get('/', (_req, res) => res.sendFile(path.join(__dirname, 'views', 'index.html')))
 // swagger
 app.use('/documentation', swagger_ui_express_1.default.serve, swagger_ui_express_1.default.setup(swagger_json_1.default));
-app.use('/authors', routers.authorRouter);
+// app.use('/authors', routers.authorRouter);
 app.use('/books', routers.bookRouter);
+app.use('/users', routers.userRouter);
 // middleware de erros
 app.use((err, _, res, __) => {
     if (err.statusCode) {

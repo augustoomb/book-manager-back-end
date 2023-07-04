@@ -18,44 +18,47 @@ const book_2 = require("../services/book");
 const http_status_codes_1 = require("http-status-codes");
 function create(req, res, _next) {
     return __awaiter(this, void 0, void 0, function* () {
-        const { title, rating, year, genre, pages, thumb, hasBeenRead, authorId } = req.body;
+        const { title, thumb, hasBeenRead, authorName, infoLink } = req.body;
+        const { userId } = req;
         const bookService = new book_2.BookService();
         const objBook = book_1.default.parse({
-            title, rating, year,
-            genre, pages, thumb, hasBeenRead, authorId
+            title, thumb, hasBeenRead, authorName, userId, infoLink
         });
-        yield bookService.create(objBook);
-        res.status(http_status_codes_1.StatusCodes.CREATED).send();
+        const createdBook = yield bookService.create(objBook);
+        res.status(http_status_codes_1.StatusCodes.CREATED).json(createdBook);
     });
 }
 exports.create = create;
 function find(req, res, _next) {
     return __awaiter(this, void 0, void 0, function* () {
         const { id } = req.params;
+        const { userId } = req;
         const bookService = new book_2.BookService();
-        const obj = yield bookService.find(parseInt(id, 10));
+        const obj = yield bookService.find(userId || 0, parseInt(id, 10));
         return res.status(http_status_codes_1.StatusCodes.OK).json(obj);
     });
 }
 exports.find = find;
-function list(_req, res, _next) {
+function list(req, res, _next) {
     return __awaiter(this, void 0, void 0, function* () {
         const bookService = new book_2.BookService();
-        const bookList = yield bookService.list();
+        const { userId } = req;
+        // console.log('augusto', userId)
+        const bookList = yield bookService.list(userId || 0);
         return res.json(bookList);
     });
 }
 exports.list = list;
 function update(req, res, _next) {
     return __awaiter(this, void 0, void 0, function* () {
-        const { title, rating, year, genre, pages, thumb, hasBeenRead, authorId } = req.body;
+        const { title, thumb, hasBeenRead, authorName, infoLink } = req.body;
+        const { userId } = req;
         const { id } = req.params;
         const bookService = new book_2.BookService();
         const objBook = book_1.default.parse({
-            title, rating, year,
-            genre, pages, thumb, hasBeenRead, authorId
+            title, thumb, hasBeenRead, authorName, userId, infoLink
         });
-        yield bookService.update(Number(id), objBook);
+        yield bookService.update(userId || 0, Number(id), objBook);
         res.status(http_status_codes_1.StatusCodes.OK).send();
     });
 }
@@ -63,8 +66,9 @@ exports.update = update;
 function exclude(req, res, _next) {
     return __awaiter(this, void 0, void 0, function* () {
         const { id } = req.params;
+        const { userId } = req;
         const bookService = new book_2.BookService();
-        yield bookService.delete(Number(id));
+        yield bookService.delete(userId || 0, Number(id));
         res.status(http_status_codes_1.StatusCodes.OK).send();
     });
 }

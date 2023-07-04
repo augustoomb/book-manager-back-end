@@ -2,10 +2,11 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const book_1 = require("../controllers/book");
+const jwtAuth_1 = require("../middleware/jwtAuth");
 const bookRouter = (0, express_1.Router)();
-bookRouter.get('/', book_1.list);
-bookRouter.get('/:id', book_1.find);
-bookRouter.post('/', book_1.create);
-bookRouter.put('/:id', book_1.update);
+bookRouter.get('/', jwtAuth_1.authenticateToken, book_1.list);
+bookRouter.get('/:id', jwtAuth_1.authenticateToken, book_1.find);
+bookRouter.post('/', jwtAuth_1.authenticateToken, book_1.create);
+bookRouter.put('/:id', jwtAuth_1.authenticateToken, book_1.update);
 bookRouter.delete('/:id', book_1.exclude);
 exports.default = bookRouter;
